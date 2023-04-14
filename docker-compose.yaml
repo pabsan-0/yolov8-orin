@@ -10,7 +10,7 @@ services:
         network_mode: host
         working_dir: /ws
         volumes:
-           - $PWD/ws:/ws
+           - $PWD/yolo:/ws
         runtime: nvidia
         deploy:
             resources:
