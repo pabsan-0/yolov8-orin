@@ -1,0 +1,3 @@
+[submodule "nvds/DeepStream-Yolo"]
+	path = nvds/DeepStream-Yolo
+	url = https://github.com/marcoslucianops/DeepStream-Yolo

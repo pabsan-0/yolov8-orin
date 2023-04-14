@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+    ultralytics:
+        image: ultralytics/ultralytics:latest-arm64
+        container_name: ultralytics
+        shm_size: 64gb
+        tty: true
+        stdin_open: true
+        network_mode: host
+        working_dir: /ws
+        volumes:
+           - $PWD/ws:/ws
+        runtime: nvidia
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          count: 1
+                          capabilities: [gpu]
