@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
     ultralytics:
-        image: ultralytics/ultralytics:latest-arm64 # this image has no GPU!
+        image: ultralytics/ultralytics:latest-jetson # this image has no GPU!
         container_name: ultralytics
         shm_size: 64gb
         tty: true

@@ -6,9 +6,9 @@ vars:
 tasks:
     yolo_get_pretrained:
         cmds: 
-            - echo 'Wait for weights to download and ^C! [press Enter to continue]'
-            - read 
-            - yolo detect
+            - echo 'Wait for weights to download and ^C! [press Enter to continue]' && read 
+            - docker compose run ultralytics 'yolo detect'
+
     yolo_train:
         cmds: 
             - docker compose run ultralytics 'yolo train data=dataset.yaml amp=False'
@@ -17,7 +17,6 @@ tasks:
         cmds:
             - docker compose run ultralytics "yolo export model=runs/detect/train2/weights/best.pt format=engine device=0"
             - echo 'Fetch your model at runs/detect/train2/weights/best.pt.'
-
 
     nvds_install:
         cmds:
