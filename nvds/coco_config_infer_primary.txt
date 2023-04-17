@@ -6,9 +6,9 @@ model-color-format=0
 custom-network-config=/dev/null
 model-file=/dev/null
 ## model engine: if not found here will be created at $PWD
-model-engine-file=nvds/model_b1_gpu0_fp32.engine
+model-engine-file=../yolo/yolov8n.engine
 ##
-labelfile-path=nvds/coco_labels.txt
+labelfile-path=coco_labels.txt
 ##
 ## int8-calib-file=calib.table
 batch-size=1
@@ -21,7 +21,7 @@ network-type=0
 cluster-mode=2
 maintain-aspect-ratio=1
 parse-bbox-func-name=NvDsInferParseYolo
-custom-lib-path=/nvds/lib/libnvdsinfer_custom_impl_Yolo.so
+custom-lib-path=DeepStream-Yolo/nvdsinfer_custom_impl_Yolo/libnvdsinfer_custom_impl_Yolo.so
 engine-create-func-name=NvDsInferYoloCudaEngineGet
 
 [class-attrs-all]

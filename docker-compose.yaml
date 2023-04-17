@@ -1,9 +1,12 @@
-version: '3.3'
+version: '2.3'
 
 services:
     ultralytics:
-        image: ultralytics/ultralytics:latest-jetson # this image has no GPU!
-        container_name: ultralytics
+        image: ultralytics-ours
+        container_name: ultralytics-ours
+        build: .
+        privileged: true
+        runtime: nvidia
         shm_size: 64gb
         tty: true
         stdin_open: true
@@ -11,5 +14,4 @@ services:
         working_dir: /ws
         volumes:
            - $PWD/yolo:/ws
-        devices:
-            - /dev/nvidia0
+           - /dev:/dev
