@@ -14,4 +14,22 @@ services:
         working_dir: /ws
         volumes:
            - $PWD/yolo:/ws
+           - $PWD/yolo/runs:/usr/src/ultralytics/runs
+           - /dev:/dev
+
+    deepstream:
+        # image: nvcr.io/nvidia/deepstream-l4t:6.0.1-base
+        # image: nvcr.io/nvidia/deepstream-l4t:6.0.1-samples
+        image: nvcr.io/nvidia/deepstream-l4t:6.2-samples
+        # command: bash /opt/nvidia/deepstream/deepstream/user_additional_install.sh && bash -c
+        container_name: deepstream
+        privileged: true
+        runtime: nvidia
+        shm_size: 64gb
+        tty: true
+        stdin_open: true
+        network_mode: host
+        working_dir: /ws
+        volumes:
+           - $PWD:/ws
            - /dev:/dev
