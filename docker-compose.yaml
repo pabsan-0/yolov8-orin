@@ -2,9 +2,11 @@ version: '2.3'
 
 services:
     ultralytics:
-        image: ultralytics-ours
-        container_name: ultralytics-ours
-        build: .
+        image: ultralytics
+        container_name: ultralytics
+        build:
+            context: .
+            dockerfile: Dockerfile.ultralytics 
         privileged: true
         runtime: nvidia
         shm_size: 64gb
@@ -12,17 +14,24 @@ services:
         stdin_open: true
         network_mode: host
         working_dir: /ws
+        environment:
+            - XAUTHORITY=$XAUTHORITY
+            - DISPLAY=$DISPLAY
         volumes:
-           - $PWD/yolo:/ws
-           - $PWD/yolo/runs:/usr/src/ultralytics/runs
-           - /dev:/dev
-
+            - $XAUTHORITY:$XAUTHORITY
+            - /tmp/.X11-unix:/tmp/.X11-unix
+            - /dev:/dev      
+            - $PWD/shared/weights:/weights
+            - $PWD/shared/media:/media
+            - $PWD/yolo/runs:/usr/src/ultralytics/runs
+            - $PWD/yolo:/ws
+           
     deepstream:
-        # image: nvcr.io/nvidia/deepstream-l4t:6.0.1-base
-        # image: nvcr.io/nvidia/deepstream-l4t:6.0.1-samples
-        image: nvcr.io/nvidia/deepstream-l4t:6.2-samples
-        # command: bash /opt/nvidia/deepstream/deepstream/user_additional_install.sh && bash -c
-        container_name: deepstream
+        image: nvds-ros 
+        build: 
+            context: .
+            dockerfile: Dockerfile.deepstream
+        container_name: nvds-ros 
         privileged: true
         runtime: nvidia
         shm_size: 64gb
@@ -30,6 +39,14 @@ services:
         stdin_open: true
         network_mode: host
         working_dir: /ws
+        environment:
+            - XAUTHORITY=$XAUTHORITY
+            - DISPLAY=$DISPLAY
         volumes:
-           - $PWD:/ws
-           - /dev:/dev
+            - $XAUTHORITY:$XAUTHORITY
+            - /tmp/.X11-unix:/tmp/.X11-unix
+            - /dev:/dev      
+            - $PWD/shared/weights:/weights
+            - $PWD/shared/media:/media
+            - $PWD/nvds:/ws
+ 

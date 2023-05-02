@@ -273,15 +273,16 @@ class Layers(object):
 def parse_args():
     parser = argparse.ArgumentParser(description='PyTorch YOLOv8 conversion')
     parser.add_argument('-w', '--weights', required=True, help='Input weights (.pt) file path (required)')
+    parser.add_argument('-o', '--out-dir', required=False, help='Directory where weights will be dumped')
     parser.add_argument(
         '-s', '--size', nargs='+', type=int, default=[640], help='Inference size [H,W] (default [640])')
     args = parser.parse_args()
     if not os.path.isfile(args.weights):
         raise SystemExit('Invalid weights file')
-    return args.weights, args.size
+    return args.weights, args.size, args.out_dir
 
 
-pt_file, inference_size = parse_args()
+pt_file, inference_size, out_dir = parse_args()
 
 model_name = os.path.basename(pt_file).split('.pt')[0]
 wts_file = model_name + '.wts' if 'yolov8' in model_name else 'yolov8_' + model_name + '.wts'
@@ -321,3 +322,6 @@ with open(wts_file, 'w') as fw, open(cfg_file, 'w') as fc:
             raise SystemExit('Model not supported')
 
 os.system('echo "%d" | cat - %s > temp && mv temp %s' % (layers.wc, wts_file, wts_file))
+
+if out_dir:
+    os.system('mv %s %s %s ' % (wts_file, cfg_file, out_dir))

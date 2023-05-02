@@ -11,6 +11,24 @@ Sample workspace to quickly deploy yolo models on NVIDIA ORIN.
     - Gstreamer
     - Deepstream-6.2
 
+<!--
+
+## This repo covers
+
+yolov8 model conversion to tensorrt engine
+    $ # wget weights or import yours
+    $ docker-compose run ultralytics
+    # python3 gen_wts_yolov8.py --size 640 -w yolov8n.pt -o /weights
+    # rm labels.txt
+nvds live inference 
+    $ cd DeepStream-Yolo
+    $ ls -l /usr/local/ | grep cuda  ## check cuda version
+    $ CUDA_VER=11.4 make -C nvdsinfer_custom_impl_Yolo # Compilation needs to be done on host
+    $ docker-compose run deepstream 
+    # bash pipe_sh/v4l2-docker.py
+-->
+
+
 ## Usage
 
 ```
