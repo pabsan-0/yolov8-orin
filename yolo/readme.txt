@@ -6,4 +6,4 @@ Use this container to convert torch .pt weights to something that can be convert
 ./dl_weights.sh 
 
 # Use something like this to convert weights to darknet-like .wts
-python3 gen_wts_yolov8.py -w /weights/yolov8n.pt -s 640 640 -o /weights/v
+python3 gen_wts_yoloV8.py -w /weights/yolov8n.pt -s 640 640 -o /weights/v
