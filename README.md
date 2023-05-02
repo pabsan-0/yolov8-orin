@@ -27,6 +27,8 @@ $ docker-compose run deepstream
 # bash pipe_sh/v4l2-docker.py  
 ```
 
+The first time you convert an `.engine`, dump it in `/weights` to avoid rebuilds.
+
   
 ## Snippets & links
 

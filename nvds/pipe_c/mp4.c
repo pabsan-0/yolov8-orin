@@ -21,7 +21,7 @@ main (int argc, char **argv)
 
     const gchar *desc_templ = \
         "  uridecodebin uri=file:///media/viva-vigo-360.mp4 ! m.sink_0                                                    "
-        "  m.sink_0 nvstreammux name=m batch-size=1 width=160 height=160                                                  "
+        "   nvstreammux name=m batch-size=1 width=360 height=360                                                          "
         " ! queue ! nvvideoconvert ! video/x-raw(memory:NVMM) ! nvinfer config-file-path=../coco_config_infer_primary.txt "
         " ! queue ! nvvideoconvert ! video/x-raw(memory:NVMM) ! nvdsosd ! nvvideoconvert ! autovideosink sync=0 async=0   "
         ;;;;;;;;
